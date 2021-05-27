@@ -25,15 +25,15 @@ function saveRecord(record) {
     // open a transaction on your pending db
     const transaction = db.transaction(['pending'], 'readwrite');
     // access your pending object store
-    const store = transaction.objectStore('pending');
+    const tackerObjectStore = transaction.objectStore('pending');
     // add record to your store with add method
-    store.add(record);
+    tackerObjectStore .add(record);
 }
 
 function checkDatabase() {
     const transaction = db.transaction(['pending'], 'readwrite');
-    const store = transaction.objectStore('pending');
-    const getAll = store.getAll();
+    const tackerObjectStore  = transaction.objectStore('pending');
+    const getAll = tackerObjectStore .getAll();
 
     getAll.onsuccess = function () {
         // if there was data in indexedDb's store, let's send it to the api server
@@ -49,9 +49,9 @@ function checkDatabase() {
                 .then(response => response.json())
                 .then(() => {
                     const transaction = db.transaction(['pending'], 'readwrite');
-                    const store = transaction.objectStore('pending');
+                    const tackerObjectStore  = transaction.objectStore('pending');
                     // clear all items in your store
-                    store.clear();
+                    tackerObjectStore .clear();
                 })
                 .catch(err => {
                     console.log(err);
