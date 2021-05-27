@@ -1,5 +1,6 @@
 const CACHE_NAME = "static-cache-v2";
 const DATA_CACHE_NAME = "data-cache-v1";
+
 const FILES_TO_CACHE = [
     "/",
     "/index.html",
@@ -7,22 +8,6 @@ const FILES_TO_CACHE = [
     "/db.js",
     "/style.css"
 ];
-
-// Respond with cached resources
-self.addEventListener('fetch', e => {
-    console.log('fetch request : ' + e.request.url)
-    e.respondWith(
-        caches.match(e.request).then(function (request) {
-            if (request) { // if cache is available, respond with cache
-                console.log('responding with cache : ' + e.request.url)
-                return request
-            } else { // if there are no cache, try fetching request
-                console.log('file is not cached, fetching : ' + e.request.url)
-                return fetch(e.request)
-            }
-        })
-    )
-});
 
 // Cache resources
 self.addEventListener('install', function (e) {
@@ -53,4 +38,20 @@ self.addEventListener('activate', function (e) {
         })
     );
     self.clients.claim();
+});
+
+// Respond with cached resources
+self.addEventListener('fetch', e => {
+    console.log('fetch request : ' + e.request.url)
+    e.respondWith(
+        caches.match(e.request).then(function (request) {
+            if (request) { // if cache is available, respond with cache
+                console.log('responding with cache : ' + e.request.url)
+                return request
+            } else { // if there are no cache, try fetching request
+                console.log('file is not cached, fetching : ' + e.request.url)
+                return fetch(e.request)
+            }
+        })
+    )
 });
