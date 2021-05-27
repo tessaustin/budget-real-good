@@ -3,7 +3,7 @@ const request = indexedDB.open('budget', 1);
 
 // this event will emit if the database version changes
 request.onupgradeneeded = function (event) {
-    const db = event.target.results;
+    const db = event.target.result;
     db.createObjectStore('pending', { autoIncrement: true });
 };
 
@@ -27,13 +27,13 @@ function saveRecord(record) {
     // access your pending object store
     const tackerObjectStore = transaction.objectStore('pending');
     // add record to your store with add method
-    tackerObjectStore .add(record);
+    tackerObjectStore.add(record);
 }
 
 function checkDatabase() {
     const transaction = db.transaction(['pending'], 'readwrite');
-    const tackerObjectStore  = transaction.objectStore('pending');
-    const getAll = tackerObjectStore .getAll();
+    const tackerObjectStore = transaction.objectStore('pending');
+    const getAll = tackerObjectStore.getAll();
 
     getAll.onsuccess = function () {
         // if there was data in indexedDb's store, let's send it to the api server
@@ -49,9 +49,9 @@ function checkDatabase() {
                 .then(response => response.json())
                 .then(() => {
                     const transaction = db.transaction(['pending'], 'readwrite');
-                    const tackerObjectStore  = transaction.objectStore('pending');
+                    const tackerObjectStore = transaction.objectStore('pending');
                     // clear all items in your store
-                    tackerObjectStore .clear();
+                    tackerObjectStore.clear();
                 })
                 .catch(err => {
                     console.log(err);
