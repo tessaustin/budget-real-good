@@ -24,6 +24,7 @@ As a traveler you can track your withdrawals & desposits whether you have data/i
 https://polar-wildwood-09716.herokuapp.com/
 
 ## Technology:
+- Express
 - IndexedDB
 - Service Workers
 - Web Manifest
