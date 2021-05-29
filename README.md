@@ -15,12 +15,13 @@ As a traveler you can track your withdrawals & desposits whether you have data/i
 * [Screenshot](#screenshot)
 
 ## Installation:
+- npm i express
 - npm i
 - npm i idb
 - npm i mongoose
 
 ## Usage:
-https://git.heroku.com/polar-wildwood-09716.git
+https://polar-wildwood-09716.herokuapp.com/
 
 ## Technology:
 - IndexedDB
